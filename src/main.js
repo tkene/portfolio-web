@@ -11,6 +11,8 @@ import "quasar/src/css/index.sass";
 
 // Assurez-vous que TailwindCSS est importé
 import "./app.css";
+// Import des animations
+import "./assets/css/animations.css";
 
 import App from "./App.vue";
 

@@ -1,42 +1,14 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useQuasar } from 'quasar'
 import Header from './components/Header.vue'
 import About from './components/About.vue'
 import Skills from './components/Skills.vue'
 import Projects from './components/Projects.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
+import { useDarkMode } from './composables/useDarkMode'
 
-const $q = useQuasar()
-const isDark = ref(false)
-
-// Vérifier le mode sombre au chargement
-onMounted(() => {
-  const darkMode = localStorage.getItem('darkMode')
-  if (darkMode === 'true' || (!darkMode && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    isDark.value = true
-    $q.dark.set(true)
-    document.documentElement.classList.add('dark')
-  } else {
-    isDark.value = false
-    $q.dark.set(false)
-    document.documentElement.classList.remove('dark')
-  }
-})
-
-const toggleDarkMode = () => {
-  isDark.value = !isDark.value
-  $q.dark.set(isDark.value)
-
-  if (isDark.value) {
-    document.documentElement.classList.add('dark')
-    localStorage.setItem('darkMode', 'true')
-  } else {
-    document.documentElement.classList.remove('dark')
-    localStorage.setItem('darkMode', 'false')
-  }
-}
+// Utilisation du composable pour gérer le dark mode
+const { isDark, toggleDarkMode } = useDarkMode()
 </script>
 
 <template>

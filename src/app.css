@@ -15,7 +15,7 @@
 
 @layer components {
   .section-container {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+    @apply container mx-0 px-4 sm:px-6 lg:px-8 py-16 md:py-24;
   }
 
   .section-title {
@@ -24,5 +24,79 @@
 
   .section-subtitle {
     @apply text-lg md:text-xl text-gray-600 dark:text-gray-400 text-center mb-12 max-w-3xl mx-auto;
+  }
+}
+
+/* Le conteneur bloque les débordements des boules lumineuses */
+.ai-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #05070a; /* Fond très sombre pour faire ressortir les couleurs */
+  overflow: hidden;
+}
+
+.glow-wrapper {
+  position: absolute;
+  inset: -100px; /* On dépasse un peu pour cacher les bords des boules */
+  filter: blur(80px); /* Flou puissant pour l'aspect gazeux */
+}
+
+.glow-ball {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  mix-blend-mode: screen; /* Mélange les couleurs quand elles se croisent */
+}
+
+/* Configuration des 3 sphères avec des animations décalées */
+.ball-1 {
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, #4f46e5, transparent 70%);
+  top: 10%;
+  left: 10%;
+  animation: orbit 25s infinite linear;
+}
+
+.ball-2 {
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, #ec4899, transparent 70%);
+  bottom: 10%;
+  right: 10%;
+  animation: orbit 35s infinite linear reverse; /* Tourne dans l'autre sens */
+}
+
+.ball-3 {
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, #06b6d4, transparent 70%);
+  top: 30%;
+  right: 20%;
+  animation: float-alt 20s infinite ease-in-out;
+}
+
+/* Animation de rotation complexe */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(100px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(100px) rotate(-360deg);
+  }
+}
+
+/* Animation de flottement aléatoire */
+@keyframes float-alt {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(10%, 20%) scale(1.2);
+  }
+  66% {
+    transform: translate(-15%, 10%) scale(0.8);
   }
 }

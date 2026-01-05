@@ -1,5 +1,5 @@
 <template>
-  <section id="about" class="section-container bg-white dark:bg-gray-900">
+  <section id="about" class="bg-white dark:bg-gray-900 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl mx-auto">
       <h2 class="section-title dark:text-black">À propos de moi</h2>
       <p class="section-subtitle">
@@ -15,14 +15,14 @@
           </p>
           <p>
             Mon expertise couvre l'ensemble du cycle de développement, de la conception UI/UX à la mise en
-            production. Je maîtrise les technologies modernes comme Vue.js, React, Node.js, et j'ai une
+            production. Je maîtrise les technologies modernes comme Vue.js, Symfony, Node.js, et j'ai une
             approche méthodique qui allie créativité et rigueur technique pour livrer des produits de qualité.
           </p>
           <p>
             Toujours en veille technologique, j'aime explorer les nouvelles tendances du développement web,
             contribuer à des projets open source et partager mes connaissances avec la communauté des développeurs.
             Mon objectif est de créer des expériences utilisateur exceptionnelles tout en respectant les meilleures
-            pratiques du développement logiciel.
+            pratiques du développement logiciel/Web.
           </p>
         </div>
 
