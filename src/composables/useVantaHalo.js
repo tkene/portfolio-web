@@ -40,6 +40,70 @@ export function useVantaHalo({ containerRef, isDark, showVanta }) {
   };
 
   /**
+   * Charge Vanta HALO via un script dynamique
+   * Cette méthode évite les problèmes de résolution de module au build
+   */
+  const loadVantaHalo = () => {
+    return new Promise((resolve, reject) => {
+      // Vérifier si Vanta est déjà chargé globalement
+      if (window.VANTA && window.VANTA.HALO) {
+        resolve(window.VANTA.HALO);
+        return;
+      }
+
+      // Vérifier si le script est déjà en cours de chargement
+      const existingScript = document.querySelector("script[data-vanta-halo]");
+      if (existingScript) {
+        const checkInterval = setInterval(() => {
+          if (window.VANTA && window.VANTA.HALO) {
+            clearInterval(checkInterval);
+            resolve(window.VANTA.HALO);
+          }
+        }, 100);
+        setTimeout(() => {
+          clearInterval(checkInterval);
+          if (!window.VANTA || !window.VANTA.HALO) {
+            reject(new Error("Timeout lors du chargement de Vanta"));
+          }
+        }, 5000);
+        return;
+      }
+
+      // Créer et charger le script depuis le dossier public
+      const script = document.createElement("script");
+      script.setAttribute("data-vanta-halo", "true");
+      script.src = "/vanta.halo.min.js";
+      script.onload = () => {
+        // Attendre un peu pour que le script s'exécute
+        setTimeout(() => {
+          if (window.VANTA && window.VANTA.HALO) {
+            resolve(window.VANTA.HALO);
+          } else if (window._vantaEffect) {
+            // Fallback pour l'ancienne API
+            resolve(window._vantaEffect);
+          } else {
+            reject(new Error("Vanta HALO n'a pas pu être chargé"));
+          }
+        }, 100);
+      };
+      script.onerror = () => {
+        // Fallback: essayer avec import dynamique en développement
+        if (import.meta.env.DEV) {
+          import("vanta/dist/vanta.halo.min.js")
+            .then((module) => {
+              const HALO = module.default || module.HALO || module;
+              resolve(HALO);
+            })
+            .catch(reject);
+        } else {
+          reject(new Error("Impossible de charger Vanta HALO"));
+        }
+      };
+      document.head.appendChild(script);
+    });
+  };
+
+  /**
    * Initialise l'effet Vanta
    */
   const initVanta = async () => {
@@ -54,8 +118,8 @@ export function useVantaHalo({ containerRef, isDark, showVanta }) {
     }
 
     try {
-      // Importation dynamique de Vanta HALO pour éviter les problèmes de build
-      const { default: HALO } = await import("vanta/dist/vanta.HALO.min");
+      // Charger Vanta HALO via script dynamique
+      const HALO = await loadVantaHalo();
 
       // Créer la nouvelle instance
       vantaEffect = HALO({
