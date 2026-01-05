@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { useQuasar } from 'quasar'
+// import { useQuasar } from 'quasar'
 
-const $q = useQuasar()
-const loading = ref(false)
-const email = import.meta.env.VITE_EMAIL
+// const $q = useQuasar()
+// const loading = ref(false)
+const email = "tuan.kene@yahoo.fr"
 
 const form = ref({
   name: '',
@@ -13,27 +13,30 @@ const form = ref({
   message: ''
 })
 
-const handleSubmit = () => {
-  loading.value = true
+/**
+ * TODO: Implement the form submission
+ */
+// const handleSubmit = () => {
+//   loading.value = true
 
-  // Simulation d'envoi (à remplacer par un vrai service)
-  setTimeout(() => {
-    loading.value = false
-    $q.notify({
-      type: 'positive',
-      message: 'Message envoyé avec succès !',
-      position: 'top'
-    })
+//   // Simulation d'envoi (à remplacer par un vrai service)
+//   setTimeout(() => {
+//     loading.value = false
+//     $q.notify({
+//       type: 'positive',
+//       message: 'Message envoyé avec succès !',
+//       position: 'top'
+//     })
 
-    // Réinitialiser le formulaire
-    form.value = {
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    }
-  }, 1500)
-}
+//     // Réinitialiser le formulaire
+//     form.value = {
+//       name: '',
+//       email: '',
+//       subject: '',
+//       message: ''
+//     }
+//   }, 1500)
+// }
 </script>
 
 <template>
