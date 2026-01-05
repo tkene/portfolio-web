@@ -4,7 +4,7 @@ import { ref } from 'vue'
 
 // const $q = useQuasar()
 // const loading = ref(false)
-const email = "tuan.kene@yahoo.fr"
+const email = "tuan.kene@yahoo.fr";
 
 const form = ref({
   name: '',
