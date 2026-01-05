@@ -1,6 +1,5 @@
 import { ref, onMounted, onBeforeUnmount, watch, nextTick } from "vue";
 import * as THREE from "three";
-import HALO from "vanta/dist/vanta.HALO.min";
 import { isMobile } from "@/utils/device";
 import { BREAKPOINTS } from "@/constants/app";
 
@@ -55,6 +54,9 @@ export function useVantaHalo({ containerRef, isDark, showVanta }) {
     }
 
     try {
+      // Importation dynamique de Vanta HALO pour éviter les problèmes de build
+      const { default: HALO } = await import("vanta/dist/vanta.HALO.min");
+
       // Créer la nouvelle instance
       vantaEffect = HALO({
         el: containerRef.value,

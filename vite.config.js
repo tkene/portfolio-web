@@ -30,5 +30,15 @@ export default defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vanta: ["vanta"],
+        },
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ["vanta"],
   },
 });
