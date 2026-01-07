@@ -12,7 +12,7 @@ const props = defineProps({
 
 defineEmits(['toggle-dark'])
 
-const typingTexts = ['HI, I AM', 'Bonjour, Je suis']
+const typingTexts = ['HI, I AM', 'Bonjour, je suis']
 </script>
 
 <template>
@@ -22,13 +22,17 @@ const typingTexts = ['HI, I AM', 'Bonjour, Je suis']
       <div class="flex items-center justify-center h-16 md:h-20">
         <!-- Navigation au centre -->
         <div class="flex items-center space-x-6">
-          <a href="#projects"
-            class="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-            Projets
-          </a>
           <a href="#about"
             class="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
             À propos
+          </a>
+          <a href="#skills"
+            class="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            Compétences
+          </a>
+          <a href="#projects"
+            class="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            Projets
           </a>
           <a href="#contact"
             class="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
